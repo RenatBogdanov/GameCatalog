@@ -1,0 +1,34 @@
+﻿@model GameCatalog.Models.Game
+
+@{
+    ViewData["Title"] = "Удалить игру";
+}
+
+<h1 class="text-danger">Удалить игру?</h1>
+
+<h3>Вы уверены, что хотите удалить «@Model.Title»?</h3>
+
+<div class="card" style="width: 24rem;">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-5">@Html.DisplayNameFor(model => model.Developer)</dt>
+            <dd class="col-sm-7">@Model.Developer</dd>
+
+            <dt class="col-sm-5">@Html.DisplayNameFor(model => model.Genre)</dt>
+            <dd class="col-sm-7">@Model.Genre</dd>
+
+            <dt class="col-sm-5">@Html.DisplayNameFor(model => model.Year)</dt>
+            <dd class="col-sm-7">@Model.Year</dd>
+
+            <dt class="col-sm-5">@Html.DisplayNameFor(model => model.Rating)</dt>
+            <dd class="col-sm-7">@Model.Rating / 10</dd>
+        </dl>
+    </div>
+</div>
+
+<br />
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Да, удалить</button>
+    <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+</form>

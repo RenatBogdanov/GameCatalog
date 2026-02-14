@@ -1,0 +1,61 @@
+﻿@model IEnumerable<GameCatalog.Models.Game>
+
+@{
+    ViewData["Title"] = "Каталог игр";
+}
+
+<h1>Каталог игр</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">+ Добавить игру</a>
+</p>
+
+<form asp-action="Index" method="get" class="row g-3 mb-4">
+    <div class="col-md-4">
+        <input type="text" name="searchString" value="@ViewBag.CurrentSearch"
+               class="form-control" placeholder="Поиск по названию..." />
+    </div>
+    <div class="col-md-3">
+        <select name="genre" class="form-select">
+            <option value="">-- Все жанры --</option>
+            @foreach (var g in (ViewBag.Genres as List<string>) ?? new List<string>())
+            {
+                    <option value="@g" selected="@(g == ViewBag.CurrentGenre)">@g</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary">Найти</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Сброс</a>
+    </div>
+</form>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Title)</th>
+            <th>@Html.DisplayNameFor(model => model.Developer)</th>
+            <th>@Html.DisplayNameFor(model => model.Genre)</th>
+            <th>@Html.DisplayNameFor(model => model.Year)</th>
+            <th>@Html.DisplayNameFor(model => model.Rating)</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Developer</td>
+                    <td>@item.Genre</td>
+                    <td>@item.Year</td>
+                    <td>@item.Rating</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">🔍</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">✏️</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">🗑️</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

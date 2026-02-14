@@ -1,0 +1,29 @@
+﻿@model GameCatalog.Models.Game
+
+@{
+    ViewData["Title"] = "Информация об игре";
+}
+
+<h1>@Model.Title</h1>
+
+<div class="card" style="width: 24rem;">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-5">@Html.DisplayNameFor(model => model.Developer)</dt>
+            <dd class="col-sm-7">@Model.Developer</dd>
+
+            <dt class="col-sm-5">@Html.DisplayNameFor(model => model.Genre)</dt>
+            <dd class="col-sm-7">@Model.Genre</dd>
+
+            <dt class="col-sm-5">@Html.DisplayNameFor(model => model.Year)</dt>
+            <dd class="col-sm-7">@Model.Year</dd>
+
+            <dt class="col-sm-5">@Html.DisplayNameFor(model => model.Rating)</dt>
+            <dd class="col-sm-7">@Model.Rating / 10</dd>
+        </dl>
+    </div>
+</div>
+
+<br />
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Редактировать</a>
+<a asp-action="Index" class="btn btn-secondary">К списку</a>
